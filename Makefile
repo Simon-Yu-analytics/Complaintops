@@ -1,8 +1,9 @@
 PYTHON ?= python3
+NODE ?= node
 
-.PHONY: all sample run test verify dashboard clean
+.PHONY: all sample run test test-js verify check dashboard clean
 
-all: verify
+all: check
 
 sample:
 	$(PYTHON) scripts/generate_sample.py
@@ -13,8 +14,13 @@ run: sample
 test:
 	PYTHONPATH=src $(PYTHON) -m unittest discover -s tests -v
 
+test-js:
+	$(NODE) tests/dashboard.test.js
+
 verify: test run
 	$(PYTHON) -m compileall -q src scripts tests
+
+check: verify test-js
 
 dashboard:
 	$(PYTHON) -m http.server 8000 -d dashboard

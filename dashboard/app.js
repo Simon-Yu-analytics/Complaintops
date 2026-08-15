@@ -1,4 +1,5 @@
 const $ = (selector) => document.querySelector(selector);
+const { forecastGeometry, staffingScenario } = window.ComplaintOpsLogic;
 const pct = (value) => `${(Number(value) * 100).toFixed(1)}%`;
 const money = (value) => new Intl.NumberFormat('en-US', {
   style: 'currency', currency: 'USD', maximumFractionDigits: 0
@@ -7,11 +8,15 @@ const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
 })[character]);
 
-document.querySelectorAll('.nav-item').forEach(button => button.addEventListener('click', () => {
-  document.querySelectorAll('.nav-item,.page').forEach(element => element.classList.remove('active'));
-  button.classList.add('active');
-  document.getElementById(button.dataset.page).classList.add('active');
-}));
+document.querySelectorAll('.nav-item').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item,.page').forEach(element => {
+      element.classList.remove('active');
+    });
+    button.classList.add('active');
+    document.getElementById(button.dataset.page).classList.add('active');
+  });
+});
 
 fetch('data/results.json')
   .then(response => {
@@ -27,7 +32,9 @@ fetch('data/results.json')
     $('#f1').textContent = pct(routing.coverage);
     $('#agents').textContent = data.staffing.total_agents;
     $('#ring-score').textContent = pct(data.classification.macro_f1);
-    $('.score-ring').style.setProperty('--score', `${data.classification.macro_f1 * 360}deg`);
+    $('.score-ring').style.setProperty(
+      '--score', `${data.classification.macro_f1 * 360}deg`
+    );
     $('#overall-accuracy').textContent = pct(data.classification.accuracy);
     $('#review-rate').textContent = pct(routing.review_rate);
     $('#test-cutoff').textContent = data.classification.cutoff_date;
@@ -39,11 +46,15 @@ fetch('data/results.json')
       <div class="bar-fill" style="width:${value / maxProduct * 100}%"></div></div><strong>${value}</strong></div>
     `).join('');
     const largest = Object.entries(data.product_counts)[0];
-    const staffingPeak = [...data.staffing.teams].sort((a, b) => b.planning_demand - a.planning_demand)[0];
-    const averageWape = Object.values(data.forecast_wape).reduce((a, b) => a + b, 0) / Object.values(data.forecast_wape).length;
+    const staffingPeak = [...data.staffing.teams].sort(
+      (a, b) => b.planning_demand - a.planning_demand
+    )[0];
+    const wapeValues = Object.values(data.forecast_wape);
+    const averageWape = wapeValues.reduce((a, b) => a + b, 0) / wapeValues.length;
     $('#insights').innerHTML = [
       `${largest[0]} is the largest queue at ${largest[1]} cases in the analysis window.`,
-      `${staffingPeak.team} has the highest upper-bound planning demand at ${staffingPeak.planning_demand} weekly cases.`,
+      `${staffingPeak.team} has the highest upper-bound planning demand `
+        + `at ${staffingPeak.planning_demand} weekly cases.`,
       `The selected product baselines backtest at ${pct(averageWape)} average WAPE.`,
       `${pct(routing.review_rate)} of low-confidence cases are reserved for human review.`
     ].map(text => `<li>${escapeHtml(text)}</li>`).join('');
@@ -55,32 +66,40 @@ fetch('data/results.json')
       <article><span>${escapeHtml(product)}</span><strong>${escapeHtml(detail.method)}</strong>
       <small>${pct(detail.backtest_wape)} WAPE</small></article>
     `).join('');
-    const maxForecast = Math.max(...Object.values(data.forecast_detail).flatMap(detail => detail.upper), 1);
+    const maxForecast = Math.max(
+      ...Object.values(data.forecast_detail).flatMap(detail => detail.upper),
+      1
+    );
     $('#forecast-chart').innerHTML = Object.entries(data.forecast_detail).map(([product, detail]) => `
-      <div class="forecast-group">${detail.point.map((value, index) => `
-        <div class="forecast-column" title="Week ${index + 1}: ${detail.lower[index]}–${detail.upper[index]} cases">
-          <div class="forecast-range" style="height:${detail.upper[index] / maxForecast * 88}%">
-            <div class="forecast-bar" style="height:${value / Math.max(detail.upper[index], 1) * 100}%"></div>
-          </div>
-        </div>`).join('')}<span>${escapeHtml(product)}</span></div>
+      <div class="forecast-group">${detail.point.map((value, index) => {
+        const geometry = forecastGeometry(
+          detail.lower[index], value, detail.upper[index], maxForecast
+        );
+        return `<div class="forecast-column"
+          title="Week ${index + 1}: ${detail.lower[index]}–${detail.upper[index]} cases">
+          <div class="forecast-range"
+            style="bottom:${geometry.bandBottom}%;height:${geometry.bandHeight}%"></div>
+          <div class="forecast-bar" style="height:${geometry.pointHeight}%"></div>
+        </div>`;
+      }).join('')}<span>${escapeHtml(product)}</span></div>
     `).join('');
 
     const renderStaffing = () => {
       const stress = Number($('#stress-slider').value) / 100;
       const casesPerAgent = data.staffing.assumptions.cases_per_agent_week;
       const weeklyCost = data.staffing.assumptions.weekly_cost_per_agent;
-      let totalAgents = 0;
-      const rows = data.staffing.teams.map(team => {
-        const planningDemand = Math.ceil(team.planning_demand * (1 + stress));
-        const agents = Math.ceil(planningDemand / casesPerAgent);
-        const capacity = agents * casesPerAgent;
-        totalAgents += agents;
-        return `<tr><td>${escapeHtml(team.team)}</td><td>${team.peak_weekly_demand}</td>
-          <td>${planningDemand}</td><td><strong>${agents}</strong></td><td>${capacity}</td>
-          <td>${pct(capacity ? team.peak_weekly_demand / capacity : 0)}</td></tr>`;
+      const scenario = staffingScenario(
+        data.staffing.teams, stress, casesPerAgent, weeklyCost
+      );
+      const rows = scenario.teams.map(team => {
+        return `<tr><td>${escapeHtml(team.team)}</td><td>${team.pointDemand}</td>
+          <td>${team.planningDemand}</td><td><strong>${team.agents}</strong></td>
+          <td>${team.capacity}</td>
+          <td>${pct(team.utilization)}</td></tr>`;
       });
       $('#staffing-body').innerHTML = rows.join('');
-      $('#weekly-cost').textContent = `${totalAgents} agents · ${money(totalAgents * weeklyCost)} / week`;
+      $('#weekly-cost').textContent = `${scenario.totalAgents} agents · `
+        + `${money(scenario.weeklyCost)} / week`;
       $('#stress-label').textContent = `+${Math.round(stress * 100)}%`;
     };
     $('#stress-slider').addEventListener('input', renderStaffing);

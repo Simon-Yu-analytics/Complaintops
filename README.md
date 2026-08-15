@@ -15,7 +15,8 @@ often analyzed separately:
 
 The repository includes a privacy-safe offline dataset generator, a bounded CFPB
 downloader, time-aware model validation, walk-forward forecast selection,
-upper-bound capacity planning, 14 unit tests, CI, and a responsive four-view
+upper-bound capacity planning, 15 Python tests, four dashboard logic tests, CI,
+and a responsive four-view
 decision dashboard.
 
 ## Contents
@@ -140,18 +141,21 @@ The offline project has no third-party Python dependencies.
 ```bash
 git clone https://github.com/Simon-Yu-analytics/Complaintops.git
 cd Complaintops
-make verify
+make check
 make dashboard
 ```
 
-Open `http://localhost:8000`. `make verify` runs all 14 tests, regenerates the
-synthetic dataset, rebuilds both JSON outputs, and byte-compiles the code.
+Open `http://localhost:8000`. `make check` runs 15 Python tests and four
+dashboard logic tests, regenerates the synthetic dataset, rebuilds both JSON
+outputs, and byte-compiles the Python code. It requires Python 3.10+ and Node
+18+ but installs no third-party packages.
 
 Useful individual commands:
 
 ```bash
 make sample   # deterministically recreate data/sample/complaints.csv
-make test     # run the 14-test standard-library suite
+make test     # run the 15-test Python standard-library suite
+make test-js  # run four dashboard calculations in Node
 make run      # regenerate data and rebuild reports/dashboard output
 ```
 
@@ -172,6 +176,7 @@ make run      # regenerate data and rebuild reports/dashboard output
 Complaintops/
 ├── .github/workflows/ci.yml       CI quality gate
 ├── dashboard/                     four-view HTML/CSS/JS decision console
+│   ├── logic.js                   tested forecast/staffing calculations
 │   └── data/results.json          committed render-ready output
 ├── data/
 │   ├── README.md                  data policy
@@ -182,7 +187,7 @@ Complaintops/
 │   └── results.json               machine-readable analysis output
 ├── scripts/generate_sample.py     deterministic data generator
 ├── src/complaintops/              routing, forecast, and capacity modules
-├── tests/test_core.py             unit and policy tests
+├── tests/                         Python and dashboard logic tests
 ├── LICENSE
 ├── Makefile
 └── README.md

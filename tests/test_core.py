@@ -3,6 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from complaintops import __version__
 from complaintops.classifier import (
     MultinomialNB,
     choose_confidence_threshold,
@@ -18,7 +19,12 @@ from complaintops.pipeline import temporal_split
 class ClassifierTests(unittest.TestCase):
     def test_learns_product_language(self):
         model = MultinomialNB().fit(
-            ["incorrect credit report account", "card charged duplicate purchase", "credit bureau dispute", "card annual fee"],
+            [
+                "incorrect credit report account",
+                "card charged duplicate purchase",
+                "credit bureau dispute",
+                "card annual fee",
+            ],
             ["Credit reporting", "Credit card", "Credit reporting", "Credit card"],
         )
         self.assertEqual(model.predict("credit bureau account dispute"), "Credit reporting")
@@ -70,7 +76,11 @@ class ForecastTests(unittest.TestCase):
 
 class OptimizerTests(unittest.TestCase):
     def test_capacity_covers_buffered_peak(self):
-        plan = staffing_plan({"Cards": [40, 60, 50]}, cases_per_agent_week=45, service_level_buffer=1.1)
+        plan = staffing_plan(
+            {"Cards": [40, 60, 50]},
+            cases_per_agent_week=45,
+            service_level_buffer=1.1,
+        )
         team = plan["teams"][0]
         self.assertGreaterEqual(team["weekly_capacity"], 60 * 1.1)
 
@@ -97,6 +107,14 @@ class PipelineTests(unittest.TestCase):
         self.assertTrue(all(row["date_received"] >= cutoff for row in test))
 
 
+class MetadataTests(unittest.TestCase):
+    def test_package_version_matches_project_metadata(self):
+        pyproject = (Path(__file__).parents[1] / "pyproject.toml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn(f'version = "{__version__}"', pyproject)
+
+
 class DataTests(unittest.TestCase):
     def test_loader_rejects_missing_columns(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -110,8 +128,13 @@ class DataTests(unittest.TestCase):
 
     def test_loader_rejects_duplicate_ids(self):
         fields = [
-            "complaint_id", "date_received", "product", "issue",
-            "narrative", "state", "submitted_via",
+            "complaint_id",
+            "date_received",
+            "product",
+            "issue",
+            "narrative",
+            "state",
+            "submitted_via",
         ]
         row = {
             "complaint_id": "C-1",
@@ -133,8 +156,13 @@ class DataTests(unittest.TestCase):
 
     def test_loader_rejects_invalid_dates(self):
         fields = [
-            "complaint_id", "date_received", "product", "issue",
-            "narrative", "state", "submitted_via",
+            "complaint_id",
+            "date_received",
+            "product",
+            "issue",
+            "narrative",
+            "state",
+            "submitted_via",
         ]
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "invalid_date.csv"

@@ -1,0 +1,947 @@
+{
+  "mode": "synthetic-sample",
+  "records": 640,
+  "date_range": [
+    "2025-01-06",
+    "2025-09-07"
+  ],
+  "classification": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "test_records": 160
+  },
+  "product_counts": {
+    "Credit reporting": 175,
+    "Debt collection": 138,
+    "Credit card": 134,
+    "Checking or savings account": 119,
+    "Mortgage": 74
+  },
+  "top_issues": {
+    "Incorrect information on your report": 91,
+    "Improper use of your report": 84,
+    "Fees or interest": 75,
+    "Communication tactics": 69,
+    "Attempts to collect debt not owed": 69,
+    "Managing an account": 66,
+    "Problem with a purchase": 59,
+    "Deposits and withdrawals": 53
+  },
+  "weekly_history": [
+    {
+      "week": "2025-01-06",
+      "product": "Checking or savings account",
+      "count": 4
+    },
+    {
+      "week": "2025-01-06",
+      "product": "Credit card",
+      "count": 5
+    },
+    {
+      "week": "2025-01-06",
+      "product": "Credit reporting",
+      "count": 7
+    },
+    {
+      "week": "2025-01-06",
+      "product": "Debt collection",
+      "count": 6
+    },
+    {
+      "week": "2025-01-06",
+      "product": "Mortgage",
+      "count": 3
+    },
+    {
+      "week": "2025-01-13",
+      "product": "Checking or savings account",
+      "count": 4
+    },
+    {
+      "week": "2025-01-13",
+      "product": "Credit card",
+      "count": 6
+    },
+    {
+      "week": "2025-01-13",
+      "product": "Credit reporting",
+      "count": 6
+    },
+    {
+      "week": "2025-01-13",
+      "product": "Debt collection",
+      "count": 2
+    },
+    {
+      "week": "2025-01-13",
+      "product": "Mortgage",
+      "count": 1
+    },
+    {
+      "week": "2025-01-20",
+      "product": "Checking or savings account",
+      "count": 3
+    },
+    {
+      "week": "2025-01-20",
+      "product": "Credit card",
+      "count": 3
+    },
+    {
+      "week": "2025-01-20",
+      "product": "Credit reporting",
+      "count": 4
+    },
+    {
+      "week": "2025-01-20",
+      "product": "Debt collection",
+      "count": 2
+    },
+    {
+      "week": "2025-01-20",
+      "product": "Mortgage",
+      "count": 2
+    },
+    {
+      "week": "2025-01-27",
+      "product": "Checking or savings account",
+      "count": 4
+    },
+    {
+      "week": "2025-01-27",
+      "product": "Credit card",
+      "count": 7
+    },
+    {
+      "week": "2025-01-27",
+      "product": "Credit reporting",
+      "count": 6
+    },
+    {
+      "week": "2025-01-27",
+      "product": "Debt collection",
+      "count": 4
+    },
+    {
+      "week": "2025-01-27",
+      "product": "Mortgage",
+      "count": 2
+    },
+    {
+      "week": "2025-02-03",
+      "product": "Checking or savings account",
+      "count": 3
+    },
+    {
+      "week": "2025-02-03",
+      "product": "Credit card",
+      "count": 3
+    },
+    {
+      "week": "2025-02-03",
+      "product": "Credit reporting",
+      "count": 5
+    },
+    {
+      "week": "2025-02-03",
+      "product": "Debt collection",
+      "count": 7
+    },
+    {
+      "week": "2025-02-03",
+      "product": "Mortgage",
+      "count": 3
+    },
+    {
+      "week": "2025-02-10",
+      "product": "Checking or savings account",
+      "count": 2
+    },
+    {
+      "week": "2025-02-10",
+      "product": "Credit card",
+      "count": 2
+    },
+    {
+      "week": "2025-02-10",
+      "product": "Credit reporting",
+      "count": 3
+    },
+    {
+      "week": "2025-02-10",
+      "product": "Debt collection",
+      "count": 6
+    },
+    {
+      "week": "2025-02-10",
+      "product": "Mortgage",
+      "count": 4
+    },
+    {
+      "week": "2025-02-17",
+      "product": "Checking or savings account",
+      "count": 3
+    },
+    {
+      "week": "2025-02-17",
+      "product": "Credit card",
+      "count": 3
+    },
+    {
+      "week": "2025-02-17",
+      "product": "Credit reporting",
+      "count": 5
+    },
+    {
+      "week": "2025-02-17",
+      "product": "Debt collection",
+      "count": 6
+    },
+    {
+      "week": "2025-02-17",
+      "product": "Mortgage",
+      "count": 3
+    },
+    {
+      "week": "2025-02-24",
+      "product": "Credit card",
+      "count": 2
+    },
+    {
+      "week": "2025-02-24",
+      "product": "Credit reporting",
+      "count": 5
+    },
+    {
+      "week": "2025-02-24",
+      "product": "Debt collection",
+      "count": 3
+    },
+    {
+      "week": "2025-02-24",
+      "product": "Mortgage",
+      "count": 2
+    },
+    {
+      "week": "2025-03-03",
+      "product": "Checking or savings account",
+      "count": 7
+    },
+    {
+      "week": "2025-03-03",
+      "product": "Credit card",
+      "count": 3
+    },
+    {
+      "week": "2025-03-03",
+      "product": "Credit reporting",
+      "count": 4
+    },
+    {
+      "week": "2025-03-03",
+      "product": "Debt collection",
+      "count": 2
+    },
+    {
+      "week": "2025-03-03",
+      "product": "Mortgage",
+      "count": 1
+    },
+    {
+      "week": "2025-03-10",
+      "product": "Checking or savings account",
+      "count": 5
+    },
+    {
+      "week": "2025-03-10",
+      "product": "Credit card",
+      "count": 3
+    },
+    {
+      "week": "2025-03-10",
+      "product": "Credit reporting",
+      "count": 2
+    },
+    {
+      "week": "2025-03-10",
+      "product": "Debt collection",
+      "count": 4
+    },
+    {
+      "week": "2025-03-10",
+      "product": "Mortgage",
+      "count": 4
+    },
+    {
+      "week": "2025-03-17",
+      "product": "Checking or savings account",
+      "count": 5
+    },
+    {
+      "week": "2025-03-17",
+      "product": "Credit card",
+      "count": 5
+    },
+    {
+      "week": "2025-03-17",
+      "product": "Credit reporting",
+      "count": 5
+    },
+    {
+      "week": "2025-03-17",
+      "product": "Debt collection",
+      "count": 3
+    },
+    {
+      "week": "2025-03-17",
+      "product": "Mortgage",
+      "count": 1
+    },
+    {
+      "week": "2025-03-24",
+      "product": "Checking or savings account",
+      "count": 3
+    },
+    {
+      "week": "2025-03-24",
+      "product": "Credit card",
+      "count": 3
+    },
+    {
+      "week": "2025-03-24",
+      "product": "Credit reporting",
+      "count": 13
+    },
+    {
+      "week": "2025-03-24",
+      "product": "Debt collection",
+      "count": 4
+    },
+    {
+      "week": "2025-03-24",
+      "product": "Mortgage",
+      "count": 1
+    },
+    {
+      "week": "2025-03-31",
+      "product": "Checking or savings account",
+      "count": 3
+    },
+    {
+      "week": "2025-03-31",
+      "product": "Credit card",
+      "count": 5
+    },
+    {
+      "week": "2025-03-31",
+      "product": "Credit reporting",
+      "count": 3
+    },
+    {
+      "week": "2025-03-31",
+      "product": "Debt collection",
+      "count": 6
+    },
+    {
+      "week": "2025-03-31",
+      "product": "Mortgage",
+      "count": 3
+    },
+    {
+      "week": "2025-04-07",
+      "product": "Checking or savings account",
+      "count": 4
+    },
+    {
+      "week": "2025-04-07",
+      "product": "Credit card",
+      "count": 4
+    },
+    {
+      "week": "2025-04-07",
+      "product": "Credit reporting",
+      "count": 6
+    },
+    {
+      "week": "2025-04-07",
+      "product": "Debt collection",
+      "count": 5
+    },
+    {
+      "week": "2025-04-07",
+      "product": "Mortgage",
+      "count": 4
+    },
+    {
+      "week": "2025-04-14",
+      "product": "Checking or savings account",
+      "count": 3
+    },
+    {
+      "week": "2025-04-14",
+      "product": "Credit card",
+      "count": 4
+    },
+    {
+      "week": "2025-04-14",
+      "product": "Credit reporting",
+      "count": 3
+    },
+    {
+      "week": "2025-04-14",
+      "product": "Debt collection",
+      "count": 9
+    },
+    {
+      "week": "2025-04-14",
+      "product": "Mortgage",
+      "count": 2
+    },
+    {
+      "week": "2025-04-21",
+      "product": "Checking or savings account",
+      "count": 3
+    },
+    {
+      "week": "2025-04-21",
+      "product": "Credit card",
+      "count": 5
+    },
+    {
+      "week": "2025-04-21",
+      "product": "Credit reporting",
+      "count": 7
+    },
+    {
+      "week": "2025-04-21",
+      "product": "Debt collection",
+      "count": 2
+    },
+    {
+      "week": "2025-04-28",
+      "product": "Checking or savings account",
+      "count": 1
+    },
+    {
+      "week": "2025-04-28",
+      "product": "Credit card",
+      "count": 4
+    },
+    {
+      "week": "2025-04-28",
+      "product": "Credit reporting",
+      "count": 3
+    },
+    {
+      "week": "2025-04-28",
+      "product": "Debt collection",
+      "count": 3
+    },
+    {
+      "week": "2025-04-28",
+      "product": "Mortgage",
+      "count": 5
+    },
+    {
+      "week": "2025-05-05",
+      "product": "Checking or savings account",
+      "count": 4
+    },
+    {
+      "week": "2025-05-05",
+      "product": "Credit card",
+      "count": 4
+    },
+    {
+      "week": "2025-05-05",
+      "product": "Credit reporting",
+      "count": 7
+    },
+    {
+      "week": "2025-05-05",
+      "product": "Debt collection",
+      "count": 2
+    },
+    {
+      "week": "2025-05-05",
+      "product": "Mortgage",
+      "count": 1
+    },
+    {
+      "week": "2025-05-12",
+      "product": "Checking or savings account",
+      "count": 4
+    },
+    {
+      "week": "2025-05-12",
+      "product": "Credit card",
+      "count": 5
+    },
+    {
+      "week": "2025-05-12",
+      "product": "Credit reporting",
+      "count": 3
+    },
+    {
+      "week": "2025-05-12",
+      "product": "Debt collection",
+      "count": 5
+    },
+    {
+      "week": "2025-05-12",
+      "product": "Mortgage",
+      "count": 2
+    },
+    {
+      "week": "2025-05-19",
+      "product": "Checking or savings account",
+      "count": 4
+    },
+    {
+      "week": "2025-05-19",
+      "product": "Credit card",
+      "count": 4
+    },
+    {
+      "week": "2025-05-19",
+      "product": "Credit reporting",
+      "count": 4
+    },
+    {
+      "week": "2025-05-26",
+      "product": "Checking or savings account",
+      "count": 1
+    },
+    {
+      "week": "2025-05-26",
+      "product": "Credit card",
+      "count": 5
+    },
+    {
+      "week": "2025-05-26",
+      "product": "Credit reporting",
+      "count": 6
+    },
+    {
+      "week": "2025-05-26",
+      "product": "Debt collection",
+      "count": 3
+    },
+    {
+      "week": "2025-05-26",
+      "product": "Mortgage",
+      "count": 3
+    },
+    {
+      "week": "2025-06-02",
+      "product": "Checking or savings account",
+      "count": 2
+    },
+    {
+      "week": "2025-06-02",
+      "product": "Credit card",
+      "count": 6
+    },
+    {
+      "week": "2025-06-02",
+      "product": "Credit reporting",
+      "count": 6
+    },
+    {
+      "week": "2025-06-02",
+      "product": "Debt collection",
+      "count": 5
+    },
+    {
+      "week": "2025-06-09",
+      "product": "Checking or savings account",
+      "count": 5
+    },
+    {
+      "week": "2025-06-09",
+      "product": "Credit card",
+      "count": 2
+    },
+    {
+      "week": "2025-06-09",
+      "product": "Credit reporting",
+      "count": 5
+    },
+    {
+      "week": "2025-06-09",
+      "product": "Debt collection",
+      "count": 7
+    },
+    {
+      "week": "2025-06-09",
+      "product": "Mortgage",
+      "count": 4
+    },
+    {
+      "week": "2025-06-16",
+      "product": "Checking or savings account",
+      "count": 4
+    },
+    {
+      "week": "2025-06-16",
+      "product": "Credit card",
+      "count": 3
+    },
+    {
+      "week": "2025-06-16",
+      "product": "Credit reporting",
+      "count": 3
+    },
+    {
+      "week": "2025-06-16",
+      "product": "Debt collection",
+      "count": 4
+    },
+    {
+      "week": "2025-06-16",
+      "product": "Mortgage",
+      "count": 5
+    },
+    {
+      "week": "2025-06-23",
+      "product": "Checking or savings account",
+      "count": 4
+    },
+    {
+      "week": "2025-06-23",
+      "product": "Credit card",
+      "count": 4
+    },
+    {
+      "week": "2025-06-23",
+      "product": "Credit reporting",
+      "count": 1
+    },
+    {
+      "week": "2025-06-23",
+      "product": "Debt collection",
+      "count": 6
+    },
+    {
+      "week": "2025-06-30",
+      "product": "Checking or savings account",
+      "count": 1
+    },
+    {
+      "week": "2025-06-30",
+      "product": "Credit card",
+      "count": 1
+    },
+    {
+      "week": "2025-06-30",
+      "product": "Credit reporting",
+      "count": 3
+    },
+    {
+      "week": "2025-06-30",
+      "product": "Debt collection",
+      "count": 3
+    },
+    {
+      "week": "2025-06-30",
+      "product": "Mortgage",
+      "count": 2
+    },
+    {
+      "week": "2025-07-07",
+      "product": "Checking or savings account",
+      "count": 2
+    },
+    {
+      "week": "2025-07-07",
+      "product": "Credit card",
+      "count": 3
+    },
+    {
+      "week": "2025-07-07",
+      "product": "Credit reporting",
+      "count": 9
+    },
+    {
+      "week": "2025-07-07",
+      "product": "Debt collection",
+      "count": 2
+    },
+    {
+      "week": "2025-07-14",
+      "product": "Checking or savings account",
+      "count": 1
+    },
+    {
+      "week": "2025-07-14",
+      "product": "Credit card",
+      "count": 2
+    },
+    {
+      "week": "2025-07-14",
+      "product": "Credit reporting",
+      "count": 3
+    },
+    {
+      "week": "2025-07-14",
+      "product": "Debt collection",
+      "count": 1
+    },
+    {
+      "week": "2025-07-14",
+      "product": "Mortgage",
+      "count": 3
+    },
+    {
+      "week": "2025-07-21",
+      "product": "Checking or savings account",
+      "count": 5
+    },
+    {
+      "week": "2025-07-21",
+      "product": "Credit card",
+      "count": 6
+    },
+    {
+      "week": "2025-07-21",
+      "product": "Credit reporting",
+      "count": 8
+    },
+    {
+      "week": "2025-07-21",
+      "product": "Debt collection",
+      "count": 8
+    },
+    {
+      "week": "2025-07-21",
+      "product": "Mortgage",
+      "count": 2
+    },
+    {
+      "week": "2025-07-28",
+      "product": "Checking or savings account",
+      "count": 5
+    },
+    {
+      "week": "2025-07-28",
+      "product": "Credit card",
+      "count": 4
+    },
+    {
+      "week": "2025-07-28",
+      "product": "Credit reporting",
+      "count": 4
+    },
+    {
+      "week": "2025-07-28",
+      "product": "Debt collection",
+      "count": 3
+    },
+    {
+      "week": "2025-07-28",
+      "product": "Mortgage",
+      "count": 6
+    },
+    {
+      "week": "2025-08-04",
+      "product": "Checking or savings account",
+      "count": 4
+    },
+    {
+      "week": "2025-08-04",
+      "product": "Credit card",
+      "count": 4
+    },
+    {
+      "week": "2025-08-04",
+      "product": "Credit reporting",
+      "count": 4
+    },
+    {
+      "week": "2025-08-04",
+      "product": "Debt collection",
+      "count": 7
+    },
+    {
+      "week": "2025-08-04",
+      "product": "Mortgage",
+      "count": 1
+    },
+    {
+      "week": "2025-08-11",
+      "product": "Checking or savings account",
+      "count": 3
+    },
+    {
+      "week": "2025-08-11",
+      "product": "Credit card",
+      "count": 3
+    },
+    {
+      "week": "2025-08-11",
+      "product": "Credit reporting",
+      "count": 5
+    },
+    {
+      "week": "2025-08-11",
+      "product": "Debt collection",
+      "count": 2
+    },
+    {
+      "week": "2025-08-18",
+      "product": "Checking or savings account",
+      "count": 6
+    },
+    {
+      "week": "2025-08-18",
+      "product": "Credit card",
+      "count": 1
+    },
+    {
+      "week": "2025-08-18",
+      "product": "Credit reporting",
+      "count": 3
+    },
+    {
+      "week": "2025-08-18",
+      "product": "Debt collection",
+      "count": 3
+    },
+    {
+      "week": "2025-08-25",
+      "product": "Checking or savings account",
+      "count": 5
+    },
+    {
+      "week": "2025-08-25",
+      "product": "Credit card",
+      "count": 5
+    },
+    {
+      "week": "2025-08-25",
+      "product": "Credit reporting",
+      "count": 8
+    },
+    {
+      "week": "2025-08-25",
+      "product": "Debt collection",
+      "count": 2
+    },
+    {
+      "week": "2025-08-25",
+      "product": "Mortgage",
+      "count": 2
+    },
+    {
+      "week": "2025-09-01",
+      "product": "Checking or savings account",
+      "count": 2
+    },
+    {
+      "week": "2025-09-01",
+      "product": "Credit card",
+      "count": 5
+    },
+    {
+      "week": "2025-09-01",
+      "product": "Credit reporting",
+      "count": 6
+    },
+    {
+      "week": "2025-09-01",
+      "product": "Debt collection",
+      "count": 1
+    },
+    {
+      "week": "2025-09-01",
+      "product": "Mortgage",
+      "count": 2
+    }
+  ],
+  "forecast": {
+    "Checking or savings account": [
+      4,
+      4,
+      4,
+      4
+    ],
+    "Credit card": [
+      4,
+      4,
+      4,
+      4
+    ],
+    "Credit reporting": [
+      6,
+      6,
+      6,
+      6
+    ],
+    "Debt collection": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "Mortgage": [
+      1,
+      1,
+      2,
+      1
+    ]
+  },
+  "forecast_wape": {
+    "Checking or savings account": 0.4736,
+    "Credit card": 0.3451,
+    "Credit reporting": 0.4178,
+    "Debt collection": 0.5726,
+    "Mortgage": 0.7841
+  },
+  "staffing": {
+    "teams": [
+      {
+        "team": "Checking or savings account",
+        "peak_weekly_demand": 4,
+        "recommended_agents": 1,
+        "weekly_capacity": 45,
+        "utilization": 0.089
+      },
+      {
+        "team": "Credit card",
+        "peak_weekly_demand": 4,
+        "recommended_agents": 1,
+        "weekly_capacity": 45,
+        "utilization": 0.089
+      },
+      {
+        "team": "Credit reporting",
+        "peak_weekly_demand": 6,
+        "recommended_agents": 1,
+        "weekly_capacity": 45,
+        "utilization": 0.133
+      },
+      {
+        "team": "Debt collection",
+        "peak_weekly_demand": 2,
+        "recommended_agents": 1,
+        "weekly_capacity": 45,
+        "utilization": 0.044
+      },
+      {
+        "team": "Mortgage",
+        "peak_weekly_demand": 2,
+        "recommended_agents": 1,
+        "weekly_capacity": 45,
+        "utilization": 0.044
+      }
+    ],
+    "total_agents": 5,
+    "weekly_cost": 8250,
+    "assumptions": {
+      "cases_per_agent_week": 45,
+      "service_level_buffer": 1.15,
+      "weekly_cost_per_agent": 1650
+    }
+  }
+}

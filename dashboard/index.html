@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ComplaintOps consumer-finance operations dashboard">
+  <title>ComplaintOps — Decision Console</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside>
+    <a class="logo" href="#overview"><span>CO</span> ComplaintOps</a>
+    <nav aria-label="Dashboard pages">
+      <button class="nav-item active" data-page="overview">01 Overview</button>
+      <button class="nav-item" data-page="triage">02 Triage intelligence</button>
+      <button class="nav-item" data-page="forecast">03 Demand forecast</button>
+      <button class="nav-item" data-page="workforce">04 Workforce plan</button>
+    </nav>
+    <div class="sidebar-note"><span class="status-dot"></span><div><strong>Offline demo</strong><small>Privacy-safe sample data</small></div></div>
+  </aside>
+  <main>
+    <header class="topbar"><p>Consumer Finance / Operations Analytics</p><div><span id="mode">Loading</span><span>v0.1</span></div></header>
+
+    <section class="page active" id="overview">
+      <div class="page-title"><div><p class="kicker">Executive command center</p><h1>Turn complaint signals<br>into operating decisions.</h1></div><p class="intro">A decision system for routing new cases, anticipating queue demand, and matching workforce capacity to service targets.</p></div>
+      <div class="kpis">
+        <article><span>Complaint records</span><strong id="records">—</strong><small id="date-range">—</small></article>
+        <article><span>Routing accuracy</span><strong id="accuracy">—</strong><small>Holdout classification</small></article>
+        <article><span>Macro F1</span><strong id="f1">—</strong><small>Balanced class quality</small></article>
+        <article class="accent"><span>Recommended agents</span><strong id="agents">—</strong><small>SLA-buffered capacity</small></article>
+      </div>
+      <div class="grid two"><article class="panel"><header><div><p class="label">Portfolio mix</p><h2>Complaints by product</h2></div><span>Volume</span></header><div id="product-bars" class="bars"></div></article><article class="panel dark"><header><div><p class="label">Management readout</p><h2>What needs attention</h2></div></header><ol id="insights" class="insights"></ol></article></div>
+    </section>
+
+    <section class="page" id="triage">
+      <div class="page-title compact"><div><p class="kicker">Routing model</p><h1>Intake triage<br>at machine speed.</h1></div><p class="intro">The baseline learns product-specific language and routes incoming narratives with an inspectable probabilistic model.</p></div>
+      <div class="grid two"><article class="panel"><p class="label">Model scorecard</p><div class="score-ring"><div><strong id="ring-score">—</strong><span>Macro F1</span></div></div><div class="model-notes"><span>Algorithm</span><strong>Multinomial Naive Bayes</strong><span>Validation</span><strong>Stratified holdout</strong><span>Fallback</span><strong>Human review below threshold</strong></div></article><article class="panel"><header><div><p class="label">Issue taxonomy</p><h2>Highest-volume queues</h2></div></header><div id="issue-list" class="issue-list"></div></article></div>
+    </section>
+
+    <section class="page" id="forecast">
+      <div class="page-title compact"><div><p class="kicker">Queue planning</p><h1>See demand<br>before it arrives.</h1></div><p class="intro">Rolling forecasts establish a transparent baseline for the next four operating weeks.</p></div>
+      <article class="panel chart-panel"><header><div><p class="label">Four-week outlook</p><h2>Forecast by product</h2></div><span>Weekly cases</span></header><div id="forecast-chart" class="forecast-chart"></div></article>
+    </section>
+
+    <section class="page" id="workforce">
+      <div class="page-title compact"><div><p class="kicker">Prescriptive analytics</p><h1>Capacity that follows<br>the forecast.</h1></div><p class="intro">The plan converts peak demand into explainable staffing recommendations using productivity and SLA assumptions.</p></div>
+      <article class="panel"><header><div><p class="label">Recommended allocation</p><h2>Product-team staffing</h2></div><strong id="weekly-cost">—</strong></header><div class="table-wrap"><table><thead><tr><th>Team</th><th>Peak demand</th><th>Agents</th><th>Capacity</th><th>Utilization</th></tr></thead><tbody id="staffing-body"></tbody></table></div></article>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
+

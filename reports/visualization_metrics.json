@@ -1,0 +1,101 @@
+{
+  "artifact_version": 1,
+  "mode": "synthetic-sample",
+  "labels": [
+    "Checking or savings account",
+    "Credit card",
+    "Credit reporting",
+    "Debt collection",
+    "Mortgage"
+  ],
+  "confusion_matrix": [
+    [
+      221,
+      8,
+      12,
+      15,
+      10
+    ],
+    [
+      21,
+      262,
+      10,
+      19,
+      9
+    ],
+    [
+      11,
+      18,
+      432,
+      31,
+      15
+    ],
+    [
+      18,
+      15,
+      12,
+      227,
+      18
+    ],
+    [
+      12,
+      9,
+      14,
+      6,
+      132
+    ]
+  ],
+  "class_metrics": {
+    "Checking or savings account": {
+      "precision": 0.7809,
+      "recall": 0.8308,
+      "f1": 0.8051,
+      "support": 266
+    },
+    "Credit card": {
+      "precision": 0.8397,
+      "recall": 0.8162,
+      "f1": 0.8278,
+      "support": 321
+    },
+    "Credit reporting": {
+      "precision": 0.9,
+      "recall": 0.8521,
+      "f1": 0.8754,
+      "support": 507
+    },
+    "Debt collection": {
+      "precision": 0.7617,
+      "recall": 0.7828,
+      "f1": 0.7721,
+      "support": 290
+    },
+    "Mortgage": {
+      "precision": 0.7174,
+      "recall": 0.763,
+      "f1": 0.7395,
+      "support": 173
+    }
+  },
+  "train_records": 3673,
+  "calibration_records": 935,
+  "test_records": 1557,
+  "start_date": "2025-01-06",
+  "end_date": "2026-01-04",
+  "calibration_cutoff_date": "2025-08-16",
+  "test_cutoff_date": "2025-10-11",
+  "correct_confidence_mean": 0.9776,
+  "error_confidence_mean": 0.9142,
+  "charts": [
+    "01_complaint_portfolio_mix.png",
+    "02_weekly_demand_trends.png",
+    "03_temporal_validation_design.png",
+    "04_routing_confusion_matrix.png",
+    "05_class_performance.png",
+    "06_threshold_tradeoff.png",
+    "07_forecast_model_comparison.png",
+    "08_four_week_forecast_outlook.png",
+    "09_workforce_capacity.png",
+    "10_demand_stress_sensitivity.png"
+  ]
+}

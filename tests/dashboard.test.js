@@ -1,5 +1,12 @@
 const assert = require('node:assert/strict');
-const { forecastGeometry, staffingScenario } = require('../dashboard/logic.js');
+const model = require('../dashboard/data/model.json');
+const {
+  feedbackStats,
+  forecastGeometry,
+  routeComplaint,
+  staffingScenario,
+  thresholdScenario
+} = require('../dashboard/logic.js');
 
 let passed = 0;
 const test = (name, fn) => {
@@ -39,6 +46,43 @@ test('scenario headcount, capacity, utilization, and cost reconcile', () => {
 
 test('invalid forecast geometry is rejected', () => {
   assert.throws(() => forecastGeometry(30, 20, 40, 50), RangeError);
+});
+
+test('browser model routes a clear credit-card narrative', () => {
+  const result = routeComplaint(
+    'the same card purchase was charged twice and the merchant refund never appeared',
+    model
+  );
+  assert.equal(result.label, 'Credit card');
+  assert.ok(result.recognizedTokens > 0);
+  assert.ok(Math.abs(result.ranking.reduce((sum, item) => sum + item.probability, 0) - 1) < 1e-12);
+});
+
+test('unrecognized language is reserved for human review', () => {
+  const result = routeComplaint('quartz zephyr xylophone', model);
+  assert.equal(result.recognizedTokens, 0);
+  assert.equal(result.decision, 'human-review');
+});
+
+test('recognized but ambiguous language is reserved for human review', () => {
+  const result = routeComplaint(
+    'I need help resolving a problem with my account. Customer service transferred me twice and the response did not address my evidence.',
+    model
+  );
+  assert.ok(result.recognizedTokens > 0);
+  assert.ok(result.confidence < model.threshold);
+  assert.equal(result.decision, 'human-review');
+});
+
+test('threshold scenarios clamp to the available curve', () => {
+  const curve = [{ threshold: 0.5 }, { threshold: 0.9 }];
+  assert.equal(thresholdScenario(curve, 99).threshold, 0.9);
+  assert.equal(thresholdScenario(curve, -4).threshold, 0.5);
+});
+
+test('device feedback summary ignores invalid ratings', () => {
+  const result = feedbackStats([{ rating: 5 }, { rating: 3 }, { rating: 9 }]);
+  assert.deepEqual(result, { count: 2, average: 4 });
 });
 
 console.log(`${passed} dashboard logic tests passed`);

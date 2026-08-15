@@ -41,6 +41,12 @@ are assigned to manual review.
 Tokens not observed during training are ignored. No state, issue label, consumer
 attribute, or protected characteristic is used as a model feature.
 
+The fitted synthetic model is exported to the browser application so a visitor
+can test a narrative without sending text to a server. The interface shows the
+ranked queue scores, influential recognized words, and the frozen automation
+decision. Device-local demo cases and service feedback are product-design
+prototypes; they are not model-training data and are not transmitted externally.
+
 ## Known limitations
 
 - Results come from synthetic narratives and do not establish real-world

@@ -9,20 +9,48 @@
 </head>
 <body>
   <aside>
-    <a class="logo" href="#overview"><span>CO</span> ComplaintOps</a>
+    <a class="logo" href="#welcome" data-open-page="welcome"><span>CO</span> ComplaintOps</a>
     <nav aria-label="Dashboard pages">
-      <button class="nav-item active" data-page="overview">01 Overview</button>
-      <button class="nav-item" data-page="triage">02 Triage intelligence</button>
-      <button class="nav-item" data-page="forecast">03 Demand forecast</button>
-      <button class="nav-item" data-page="workforce">04 Workforce plan</button>
+      <button class="nav-item active" data-page="welcome" data-short="HM">Home</button>
+      <button class="nav-item" data-page="lab" data-short="CX">Customer portal</button>
+      <button class="nav-item" data-page="operations" data-short="OP">Operations overview</button>
+      <button class="nav-item" data-page="triage" data-short="TR">Triage intelligence</button>
+      <button class="nav-item" data-page="forecast" data-short="FC">Demand forecast</button>
+      <button class="nav-item" data-page="workforce" data-short="WF">Workforce plan</button>
     </nav>
     <div class="sidebar-note"><span class="status-dot"></span><div><strong>Offline demo</strong><small>Privacy-safe sample data</small></div></div>
   </aside>
   <main>
-    <header class="topbar"><p>Consumer Finance / Operations Analytics</p><div><span id="mode">Loading</span><span>v1.0</span></div></header>
+    <header class="topbar"><p>Consumer Finance / Operations Analytics</p><div><span id="mode">Loading</span><span>v1.1</span></div></header>
 
-    <section class="page active" id="overview">
-      <div class="page-title"><div><p class="kicker">Executive command center</p><h1>Turn complaint signals<br>into operating decisions.</h1></div><p class="intro">A decision system for routing new cases, anticipating queue demand, and matching workforce capacity to service targets.</p></div>
+    <section class="page welcome-page active" id="welcome">
+      <div class="welcome-hero">
+        <div class="welcome-copy">
+          <p class="kicker">Interactive business analytics portfolio</p>
+          <h1>Customer voice,<br>translated into action.</h1>
+          <p class="welcome-intro">ComplaintOps connects a customer-facing complaint journey with the operating decisions behind it: confidence-aware routing, demand forecasting, and workforce capacity planning.</p>
+          <div class="welcome-actions">
+            <button class="primary-action welcome-primary" type="button" data-open-page="lab">Enter customer experience</button>
+            <button class="welcome-secondary" type="button" data-open-page="operations">Explore operations analytics</button>
+          </div>
+          <p class="welcome-disclosure">Student-built demonstration · Synthetic data · No personal information is transmitted</p>
+        </div>
+        <div class="welcome-visual" aria-label="ComplaintOps workflow summary">
+          <div class="visual-orbit orbit-one"><span>01</span><strong>Understand</strong><small>Complaint narrative</small></div>
+          <div class="visual-orbit orbit-two"><span>02</span><strong>Anticipate</strong><small>Queue demand</small></div>
+          <div class="visual-orbit orbit-three"><span>03</span><strong>Act</strong><small>Capacity decision</small></div>
+          <div class="visual-core"><span>CO</span><strong>Decision loop</strong></div>
+        </div>
+      </div>
+      <div class="journey-grid">
+        <article><span>Customer experience</span><strong>Explain the routing decision</strong><p>Test a complaint, request a person, ask process questions, and leave device-local feedback.</p><button type="button" data-open-page="lab">Open portal →</button></article>
+        <article><span>Predictive analytics</span><strong>See demand before it arrives</strong><p>Compare transparent queue-level baselines and inspect four-week forecasts with uncertainty.</p><button type="button" data-open-page="forecast">View forecast →</button></article>
+        <article><span>Prescriptive analytics</span><strong>Turn forecasts into staffing</strong><p>Stress demand, productivity, and cost assumptions before recommending headcount.</p><button type="button" data-open-page="workforce">Plan capacity →</button></article>
+      </div>
+    </section>
+
+    <section class="page" id="operations">
+      <div class="page-title"><div><p class="kicker">Executive command center</p><h1>Turn complaint signals<br>into operating decisions.</h1></div><div class="intro"><p>A decision system for routing new cases, anticipating queue demand, and matching workforce capacity to service targets.</p><button class="text-action" type="button" data-open-page="lab">Try the routing lab <span>→</span></button></div></div>
       <div class="kpis">
         <article><span>Complaint records</span><strong id="records">—</strong><small id="date-range">—</small></article>
         <article><span>Auto-route accuracy</span><strong id="accuracy">—</strong><small>Above confidence threshold</small></article>
@@ -32,23 +60,102 @@
       <div class="grid two"><article class="panel"><header><div><p class="label">Portfolio mix</p><h2>Complaints by product</h2></div><span>Volume</span></header><div id="product-bars" class="bars"></div></article><article class="panel dark"><header><div><p class="label">Management readout</p><h2>What needs attention</h2></div></header><ol id="insights" class="insights"></ol></article></div>
     </section>
 
+    <section class="page" id="lab">
+      <div class="page-title compact"><div><p class="kicker">Customer experience prototype</p><h1>Describe the issue.<br>See what happens next.</h1></div><p class="intro">A privacy-safe intake journey that explains the predicted queue, offers guided support, and lets customers request a person or leave service feedback.</p></div>
+      <div class="lab-grid">
+        <form class="panel lab-input-panel" id="routing-form">
+          <div><p class="label">Complaint narrative</p><h2>What did the customer report?</h2></div>
+          <label class="sr-only" for="complaint-input">Complaint narrative</label>
+          <textarea id="complaint-input" maxlength="800" placeholder="Example: I paid my credit card bill, but the payment is still missing and I was charged a late fee."></textarea>
+          <div class="input-meta"><span id="input-guidance">Use at least 20 characters.</span><span id="character-count">0 / 800</span></div>
+          <div class="lab-actions">
+            <div class="sample-chips" aria-label="Example complaints">
+              <button type="button" data-sample="card">Credit card</button>
+              <button type="button" data-sample="mortgage">Mortgage</button>
+              <button type="button" data-sample="reporting">Credit report</button>
+              <button type="button" data-sample="ambiguous">Mixed issue</button>
+            </div>
+            <button class="primary-action" id="analyze-complaint" type="submit">Analyze complaint</button>
+          </div>
+          <p class="privacy-note">Demo only · Runs locally in the browser · Do not enter personal information</p>
+        </form>
+        <article class="panel lab-result-panel" aria-live="polite">
+          <p class="label">Routing recommendation</p>
+          <div class="empty-result" id="empty-result">
+            <span>Ready for a narrative</span>
+            <strong>Your routing result will appear here.</strong>
+            <p>The app will show the predicted queue, confidence ranking, automation decision, and the words that influenced the result.</p>
+          </div>
+          <div class="routing-result" id="routing-result" hidden>
+            <span class="decision-badge" id="routing-decision">—</span>
+            <p class="result-eyebrow">Recommended queue</p>
+            <strong class="result-queue" id="routing-queue">—</strong>
+            <div class="confidence-line"><span>Model confidence</span><strong id="routing-confidence">—</strong></div>
+            <div class="probability-list" id="probability-list"></div>
+            <div class="evidence-block"><span>Most influential recognized words</span><div id="evidence-tokens"></div></div>
+            <p class="result-note" id="routing-note">—</p>
+            <button class="secondary-action" id="create-demo-case" type="button">Create demo case</button>
+            <div class="case-confirmation" id="case-confirmation" hidden></div>
+          </div>
+        </article>
+      </div>
+      <div class="customer-follow-up">
+        <article class="panel support-panel">
+          <header><div><p class="label">Guided customer support</p><h2>Ask about the complaint process</h2></div><span>Demo assistant</span></header>
+          <div class="chat-log" id="chat-log" aria-live="polite">
+            <div class="chat-message assistant"><span>ComplaintOps support</span><p>Hi — I can explain routing, review, timing, and privacy. I can also create a demo request for a human specialist.</p></div>
+          </div>
+          <div class="support-prompts" aria-label="Common support questions">
+            <button type="button" data-support-question="status">How do I check status?</button>
+            <button type="button" data-support-question="review">Why is human review needed?</button>
+            <button type="button" data-support-question="privacy">Is my information stored?</button>
+          </div>
+          <form class="support-form" id="support-form"><label class="sr-only" for="support-input">Ask customer support</label><input id="support-input" maxlength="240" placeholder="Ask a question about the process"><button type="submit">Send</button></form>
+          <button class="human-support-action" id="human-support-action" type="button">Request a human specialist</button>
+          <p class="support-status" id="support-status" role="status"></p>
+        </article>
+        <form class="panel feedback-panel" id="feedback-form">
+          <header><div><p class="label">Service feedback</p><h2>How was this experience?</h2></div><span>Stored on this device only</span></header>
+          <fieldset><legend>Overall rating</legend><div class="rating-buttons" id="rating-buttons" role="radiogroup" aria-label="Service rating"><button type="button" data-rating="1" aria-label="1 star">1</button><button type="button" data-rating="2" aria-label="2 stars">2</button><button type="button" data-rating="3" aria-label="3 stars">3</button><button type="button" data-rating="4" aria-label="4 stars">4</button><button type="button" data-rating="5" aria-label="5 stars">5</button></div></fieldset>
+          <label for="feedback-topic">What are you rating?</label><select id="feedback-topic"><option>Complaint intake</option><option>Routing explanation</option><option>Customer support</option><option>Overall experience</option></select>
+          <label for="feedback-comment">Optional comments</label><textarea id="feedback-comment" maxlength="500" placeholder="Tell us what was clear or what could be improved."></textarea>
+          <div class="feedback-summary" id="feedback-summary"><span>This device</span><strong>No feedback submitted yet</strong></div>
+          <button class="primary-action" type="submit">Submit feedback</button>
+          <p class="feedback-status" id="feedback-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
     <section class="page" id="triage">
       <div class="page-title compact"><div><p class="kicker">Routing model</p><h1>Automate the clear cases.<br>Escalate the uncertain ones.</h1></div><p class="intro">An inspectable probabilistic baseline is evaluated on the newest quarter of data. Low-confidence predictions are routed to a human review queue.</p></div>
       <div class="grid two"><article class="panel"><p class="label">Model scorecard</p><div class="score-ring"><div><strong id="ring-score">—</strong><span>Macro F1</span></div></div><div class="model-notes"><span>Algorithm</span><strong>Multinomial Naive Bayes</strong><span>Validation</span><strong>Newest 25% holdout</strong><span>Confidence rule</span><strong id="threshold-note">—</strong></div><div class="triage-stats"><div><span>Overall accuracy</span><strong id="overall-accuracy">—</strong></div><div><span>Review rate</span><strong id="review-rate">—</strong></div><div><span>Test cutoff</span><strong id="test-cutoff">—</strong></div></div></article><article class="panel"><header><div><p class="label">Issue taxonomy</p><h2>Highest-volume queues</h2></div></header><div id="issue-list" class="issue-list"></div></article></div>
+      <article class="panel policy-simulator">
+        <header><div><p class="label">Policy simulator</p><h2>Explore the accuracy–automation trade-off</h2></div><span>Calibration window only</span></header>
+        <div class="policy-layout">
+          <div class="policy-control"><div><span>Confidence threshold</span><strong id="policy-threshold">—</strong></div><input id="threshold-slider" type="range" min="0" max="10" step="1" value="0" aria-label="Confidence threshold scenario"><p>The frozen production-style policy remains marked on the scale. Moving this control does not change the reported test result.</p></div>
+          <div class="policy-metrics"><div><span>Routing accuracy</span><strong id="policy-accuracy">—</strong></div><div><span>Auto-route coverage</span><strong id="policy-coverage">—</strong></div><div><span>Human review</span><strong id="policy-review">—</strong></div></div>
+        </div>
+      </article>
     </section>
 
     <section class="page" id="forecast">
       <div class="page-title compact"><div><p class="kicker">Queue planning</p><h1>See demand<br>before it arrives.</h1></div><p class="intro">Rolling forecasts establish a transparent baseline for the next four operating weeks.</p></div>
       <div id="forecast-methods" class="forecast-methods"></div>
-      <article class="panel chart-panel"><header><div><p class="label">Four-week outlook</p><h2>Forecast by product</h2></div><span>Point forecast + 80% interval</span></header><div id="forecast-chart" class="forecast-chart"></div></article>
+      <article class="panel chart-panel"><header><div><p class="label">Four-week outlook</p><h2>Forecast by product</h2></div><label class="select-label">Queue <select id="forecast-product-filter" aria-label="Forecast product filter"><option value="all">All queues</option></select></label></header><div id="forecast-chart" class="forecast-chart"></div></article>
     </section>
 
     <section class="page" id="workforce">
       <div class="page-title compact"><div><p class="kicker">Prescriptive analytics</p><h1>Capacity that follows<br>the forecast.</h1></div><p class="intro">The base plan staffs to the 80% forecast upper bound. Use the stress control to test how demand shocks change headcount and weekly cost.</p></div>
-      <div class="scenario-control"><div><span>Demand stress scenario</span><strong id="stress-label">+0%</strong></div><input id="stress-slider" type="range" min="0" max="40" step="5" value="0" aria-label="Demand stress percentage"><small>Base plan</small><small>+40%</small></div>
+      <div class="scenario-control">
+        <div class="scenario-field"><div><span>Demand stress</span><strong id="stress-label">+0%</strong></div><input id="stress-slider" type="range" min="0" max="40" step="5" value="0" aria-label="Demand stress percentage"><small>0%–40%</small></div>
+        <div class="scenario-field"><div><span>Cases per agent</span><strong id="productivity-label">24</strong></div><input id="productivity-slider" type="range" min="18" max="32" step="1" value="24" aria-label="Cases handled per agent per week"><small>Weekly productivity</small></div>
+        <div class="scenario-field"><div><span>Cost per agent</span><strong id="cost-label">$1,650</strong></div><input id="cost-slider" type="range" min="1200" max="2200" step="50" value="1650" aria-label="Weekly cost per agent"><small>Fully loaded weekly cost</small></div>
+        <button class="scenario-reset" id="scenario-reset" type="button">Reset assumptions</button>
+      </div>
       <article class="panel"><header><div><p class="label">Recommended allocation</p><h2>Product-team staffing</h2></div><strong id="weekly-cost">—</strong></header><div class="table-wrap"><table><thead><tr><th>Team</th><th>Point peak</th><th>Planning demand</th><th>Agents</th><th>Capacity</th><th>Point utilization</th></tr></thead><tbody id="staffing-body"></tbody></table></div></article>
     </section>
   </main>
+  <script src="data/app-data.js"></script>
   <script src="logic.js"></script>
   <script src="app.js"></script>
 </body>

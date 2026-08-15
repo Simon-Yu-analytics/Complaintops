@@ -18,6 +18,32 @@ from .optimize import staffing_plan
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def build_dashboard_model(
+    model: MultinomialNB,
+    threshold: float,
+    training_records: int,
+) -> dict[str, object]:
+    """Export the fitted baseline for transparent, browser-side inference."""
+    labels = sorted(model.class_counts)
+    return {
+        "version": 1,
+        "mode": "synthetic-sample",
+        "alpha": model.alpha,
+        "threshold": round(threshold, 4),
+        "training_records": training_records,
+        "vocabulary": sorted(model.vocabulary),
+        "classes": [
+            {
+                "label": label,
+                "documents": model.class_counts[label],
+                "total_tokens": model.total_tokens[label],
+                "token_counts": dict(sorted(model.token_counts[label].items())),
+            }
+            for label in labels
+        ],
+    }
+
+
 def _round_output(value: object) -> object:
     """Round report floats recursively while preserving the output structure."""
     if isinstance(value, float):
@@ -84,6 +110,33 @@ def run() -> dict[str, object]:
         confidences,
         threshold=float(threshold_policy["threshold"]),
     )
+    curve_thresholds = sorted(
+        {
+            0.50,
+            0.60,
+            0.70,
+            0.80,
+            0.85,
+            0.90,
+            0.93,
+            0.95,
+            round(float(threshold_policy["threshold"]), 4),
+            0.97,
+            0.99,
+        }
+    )
+    calibration_curve = [
+        {
+            key: round(value, 4) if isinstance(value, float) else value
+            for key, value in selective_routing_metrics(
+                [row["product"] for row in calibration],
+                calibration_predictions,
+                calibration_confidences,
+                threshold,
+            ).items()
+        }
+        for threshold in curve_thresholds
+    ]
 
     weekly = weekly_counts(rows)
     forecast_plan = forecast_plan_by_product(weekly, horizon=4)
@@ -117,6 +170,7 @@ def run() -> dict[str, object]:
                 key: round(value, 4) if isinstance(value, float) else value
                 for key, value in threshold_policy.items()
             },
+            "calibration_curve": calibration_curve,
             "selective_routing": {
                 key: round(value, 4) if isinstance(value, float) else value
                 for key, value in routing.items()
@@ -148,6 +202,21 @@ def run() -> dict[str, object]:
     for target in targets:
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(encoded + "\n", encoding="utf-8")
+    dashboard_model = build_dashboard_model(
+        model,
+        threshold=float(threshold_policy["threshold"]),
+        training_records=len(train),
+    )
+    encoded_model = json.dumps(dashboard_model, indent=2)
+    (ROOT / "dashboard" / "data" / "model.json").write_text(
+        encoded_model + "\n",
+        encoding="utf-8",
+    )
+    (ROOT / "dashboard" / "data" / "app-data.js").write_text(
+        f"window.COMPLAINTOPS_RESULTS = {encoded};\n"
+        f"window.COMPLAINTOPS_MODEL = {encoded_model};\n",
+        encoding="utf-8",
+    )
     print(
         json.dumps(
             {

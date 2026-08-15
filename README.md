@@ -2,8 +2,8 @@
 
 [![Offline quality gates](https://github.com/Simon-Yu-analytics/Complaintops/actions/workflows/ci.yml/badge.svg)](https://github.com/Simon-Yu-analytics/Complaintops/actions/workflows/ci.yml)
 
-**Confidence-aware complaint routing, queue forecasting, and workforce scenario
-planning for consumer-finance operations.**
+**An interactive customer-intake and operations analytics application for
+confidence-aware complaint routing, queue forecasting, and workforce planning.**
 
 ComplaintOps is a student-built analytics case study modeled around the work of
 a customer-operations team. I built it to connect three questions that are
@@ -12,22 +12,25 @@ often analyzed separately:
 1. Which product queue should receive a new complaint?
 2. How many cases should each queue expect over the next four weeks?
 3. How much dedicated capacity is required under normal and stressed demand?
+4. How should customers receive explanations, request a person, and leave
+   feedback without pretending a portfolio demo is a live financial service?
 
 The repository includes a privacy-safe offline dataset generator, a bounded CFPB
 downloader, time-aware model validation, walk-forward forecast selection,
-upper-bound capacity planning, 15 Python tests, four dashboard logic tests, CI,
-and a responsive four-view
-decision dashboard.
+upper-bound capacity planning, 16 Python tests, nine browser-logic tests, CI,
+and a responsive six-view application with a landing page, customer portal, and operations
+console.
 
 ## Contents
 
 - [Why I built this](#why-i-built-this)
 - [Decision workflow](#decision-workflow)
 - [Demonstration snapshot](#demonstration-snapshot)
+- [Visual analysis and report](#visual-analysis-and-report)
 - [Technical decisions](#technical-decisions)
 - [What is implemented](#what-is-implemented)
 - [Reproduce the project](#reproduce-the-project)
-- [Dashboard views](#dashboard-views)
+- [Application views](#application-views)
 - [Data source and responsible use](#data-source-and-responsible-use)
 - [Assumptions and limitations](#assumptions-and-limitations)
 - [What I learned](#what-i-learned)
@@ -61,7 +64,7 @@ Schema checks --> temporal train/calibration/test split
                                              capacity plan + stress scenario
                                                             |
                                                             v
-                                                   decision dashboard
+                                                   interactive application
 ```
 
 ## Demonstration snapshot
@@ -88,6 +91,24 @@ The chronological evaluation contains 3,673 training cases, 935 calibration
 cases, and 1,557 final test cases. The calibration window begins on 16 August
 2025 and the untouched test window begins on 11 October 2025.
 
+## Visual analysis and report
+
+The submission includes a **14-page [analysis report](reports/ComplaintOps_Analysis_Report.pdf)**
+and ten reproducible figures in the [`plots/`](plots/) gallery. The report is
+written as a business narrative: portfolio demand leads to routing policy,
+forecast uncertainty, workforce capacity, and a customer-support design.
+
+| Routing quality | Demand and capacity |
+|---|---|
+| ![Final-period routing confusion matrix](plots/04_routing_confusion_matrix.png) | ![Four-week queue forecast](plots/08_four_week_forecast_outlook.png) |
+| ![Confidence threshold trade-off](plots/06_threshold_tradeoff.png) | ![Workforce capacity by queue](plots/09_workforce_capacity.png) |
+
+Unlike a generic visualization dump, each figure answers a documented decision
+question. The chart gallery also includes the chronological split, class-level
+precision/recall/F1, forecast benchmark comparison, and demand-stress
+sensitivity. All figures and report pages state that the results use synthetic
+demonstration data.
+
 ## Technical decisions
 
 | Decision | Implementation | Reason |
@@ -97,13 +118,25 @@ cases, and 1,557 final test cases. The calibration window begins on 16 August
 | Automation policy | Calibrated confidence threshold | Separates model quality from the business decision about which cases are safe to automate |
 | Forecast selection | Per-queue walk-forward WAPE | Prevents one method from being assumed best for products with different demand patterns |
 | Capacity risk | Highest 80% forecast upper bound | Makes the staffing recommendation reflect forecast uncertainty rather than only an average |
+| Customer interaction | Browser-side model + device-local demo state | Makes the workflow testable without transmitting complaint text or presenting a fake live service |
 
 The routing model's intended use, evaluation design, failure modes, and
 monitoring recommendations are documented in the [model card](docs/MODEL_CARD.md).
 
 ## What is implemented
 
-### 1. Intake routing
+### 1. Customer experience prototype
+
+- An English-language complaint intake form that runs the exported routing
+  model directly in the browser.
+- Ranked queue probabilities, model confidence, influential recognized words,
+  and an explicit auto-route versus human-review recommendation.
+- Device-local demo case references and an option to request a human specialist.
+- A guided support assistant covering status, review, privacy, and documents.
+- A 1–5 rating and written feedback form stored only on the current device.
+- Clear boundaries stating that no real support request is transmitted.
+
+### 2. Intake routing
 
 - Inspectable multinomial Naive Bayes baseline implemented with the Python
   standard library.
@@ -114,7 +147,7 @@ monitoring recommendations are documented in the [model card](docs/MODEL_CARD.md
 - Calibration policy, threshold, coverage, review rate, and test cutoff exposed
   in the machine-readable report.
 
-### 2. Queue forecasting
+### 3. Queue forecasting
 
 - Weekly product-level aggregation with missing weeks represented as zeros.
 - Fair walk-forward comparison of last-value, four-week average, eight-week
@@ -124,15 +157,15 @@ monitoring recommendations are documented in the [model card](docs/MODEL_CARD.md
 - Naive benchmark retained in the output so model complexity is only used when
   it improves the backtest.
 
-### 3. Workforce planning
+### 4. Workforce planning
 
 - Staffing is based on the highest 80% forecast upper bound, not only the point
   estimate.
 - Explicit productivity assumption of 24 closed cases per agent per week.
 - Explicit weekly fully loaded cost assumption of $1,650 per agent.
 - Dedicated product-team assumption disclosed rather than hidden.
-- Interactive 0%–40% demand stress control recalculates agents, capacity,
-  utilization, and cost in the browser.
+- Interactive demand stress, productivity, and weekly cost controls recalculate
+  agents, capacity, utilization, and cost in the browser.
 
 ## Reproduce the project
 
@@ -145,47 +178,71 @@ make check
 make dashboard
 ```
 
-Open `http://localhost:8000`. `make check` runs 15 Python tests and four
-dashboard logic tests, regenerates the synthetic dataset, rebuilds both JSON
-outputs, and byte-compiles the Python code. It requires Python 3.10+ and Node
-18+ but installs no third-party packages.
+Open `http://localhost:8000`. The committed `dashboard/data/app-data.js` also
+allows `dashboard/index.html` to open directly without a server. `make check`
+runs 16 Python tests and nine application-logic tests, regenerates the
+synthetic dataset, rebuilds the report/model/application artifacts, and
+byte-compiles the Python code. It requires Python 3.10+ and Node 18+ but
+installs no third-party packages.
 
 Useful individual commands:
 
 ```bash
 make sample   # deterministically recreate data/sample/complaints.csv
-make test     # run the 15-test Python standard-library suite
-make test-js  # run four dashboard calculations in Node
+make test     # run the 16-test Python standard-library suite
+make test-js  # run nine browser/application calculations in Node
 make run      # regenerate data and rebuild reports/dashboard output
 ```
 
-## Dashboard views
+The visual report uses optional, pinned-range dependencies so the core pipeline
+remains standard-library only:
 
+```bash
+python -m pip install -r requirements-viz.txt
+make artifacts  # rebuild 10 PNGs + 14-page PDF, then validate both
+```
+
+## Application views
+
+- **Home:** a visitor-facing landing page with separate entry points for the
+  customer journey and internal operations analysis.
 - **Overview:** portfolio mix, operating KPIs, forecast error, and management
   readout.
+- **Customer portal:** live complaint routing, confidence explanation, demo
+  case creation, guided support, human handoff, and device-local feedback.
 - **Triage intelligence:** overall scorecard, frozen test cutoff, confidence
-  threshold, automation coverage, and review rate.
+  threshold, automation coverage, review rate, and a calibration-policy slider.
 - **Demand forecast:** selected method and WAPE for every product plus point and
-  80% interval bars.
-- **Workforce plan:** upper-bound capacity by queue and an interactive demand
-  stress scenario.
+  80% interval bars with a queue filter.
+- **Workforce plan:** upper-bound capacity by queue with interactive demand,
+  productivity, and cost scenarios.
 
 ## Repository layout
 
 ```text
 Complaintops/
 ├── .github/workflows/ci.yml       CI quality gate
-├── dashboard/                     four-view HTML/CSS/JS decision console
-│   ├── logic.js                   tested forecast/staffing calculations
-│   └── data/results.json          committed render-ready output
+├── dashboard/                     six-view customer + operations application
+│   ├── app.js                     interaction and presentation layer
+│   ├── logic.js                   tested routing/scenario calculations
+│   └── data/
+│       ├── app-data.js            file-safe browser data bundle
+│       ├── model.json             exported synthetic routing model
+│       └── results.json           committed render-ready output
 ├── data/
 │   ├── README.md                  data policy
 │   └── sample/                    locally generated CSV (Git-ignored)
 ├── docs/MODEL_CARD.md             intended use, evaluation, and risks
 ├── reports/
+│   ├── ComplaintOps_Analysis_Report.pdf
 │   ├── README.md                  output contract
 │   └── results.json               machine-readable analysis output
-├── scripts/generate_sample.py     deterministic data generator
+├── plots/                          10 reproducible decision visualizations
+├── scripts/
+│   ├── generate_sample.py         deterministic data generator
+│   ├── generate_visualizations.py PNG and evaluation-metric generator
+│   ├── generate_report.py         14-page PDF report builder
+│   └── validate_artifacts.py      PNG/PDF submission quality checks
 ├── src/complaintops/              routing, forecast, and capacity modules
 ├── tests/                         Python and dashboard logic tests
 ├── LICENSE
@@ -210,6 +267,9 @@ data-use notice before analysis.
 
 - Synthetic benchmark results demonstrate the pipeline, not production model
   performance.
+- The customer-support conversation is a bounded, rule-based demonstration;
+  it is not a live agent or a general-purpose chatbot. Demo cases and feedback
+  stay in local browser storage and are not sent to a company.
 - Naive Bayes confidence is a routing score, not a perfectly calibrated
   probability; the policy must be monitored and recalibrated on real data.
 - Forecast intervals use historical absolute errors and do not model correlated

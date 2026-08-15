@@ -13,7 +13,7 @@ from complaintops.classifier import (
 from complaintops.data import load_complaints
 from complaintops.forecast import moving_average_forecast, select_method
 from complaintops.optimize import staffing_plan
-from complaintops.pipeline import temporal_split
+from complaintops.pipeline import build_dashboard_model, temporal_split
 
 
 class ClassifierTests(unittest.TestCase):
@@ -105,6 +105,19 @@ class PipelineTests(unittest.TestCase):
         train, test, cutoff = temporal_split(rows, test_fraction=0.3)
         self.assertTrue(all(row["date_received"] < cutoff for row in train))
         self.assertTrue(all(row["date_received"] >= cutoff for row in test))
+
+    def test_dashboard_model_export_is_complete_and_deterministic(self):
+        model = MultinomialNB(alpha=0.8).fit(
+            ["duplicate card charge", "mortgage escrow payment"],
+            ["Credit card", "Mortgage"],
+        )
+        exported = build_dashboard_model(model, threshold=0.9, training_records=2)
+        self.assertEqual(exported["vocabulary"], sorted(exported["vocabulary"]))
+        self.assertEqual(exported["threshold"], 0.9)
+        self.assertEqual(
+            [item["label"] for item in exported["classes"]],
+            ["Credit card", "Mortgage"],
+        )
 
 
 class MetadataTests(unittest.TestCase):

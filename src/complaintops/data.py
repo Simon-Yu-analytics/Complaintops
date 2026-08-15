@@ -22,14 +22,28 @@ REQUIRED_COLUMNS = {
 
 def load_complaints(path: str | Path) -> list[dict[str, str]]:
     with Path(path).open(newline="", encoding="utf-8") as stream:
-        rows = list(csv.DictReader(stream))
+        reader = csv.DictReader(stream)
+        missing = REQUIRED_COLUMNS - set(reader.fieldnames or [])
+        if missing:
+            raise ValueError(f"Missing required columns: {sorted(missing)}")
+        rows = list(reader)
     if not rows:
         raise ValueError("Complaint data is empty")
-    missing = REQUIRED_COLUMNS - set(rows[0])
-    if missing:
-        raise ValueError(f"Missing required columns: {sorted(missing)}")
-    for row in rows:
-        datetime.strptime(row["date_received"], "%Y-%m-%d")
+    seen_ids: set[str] = set()
+    for row_number, row in enumerate(rows, start=2):
+        empty = [column for column in REQUIRED_COLUMNS if not (row.get(column) or "").strip()]
+        if empty:
+            raise ValueError(f"Row {row_number} has empty required fields: {sorted(empty)}")
+        complaint_id = row["complaint_id"].strip()
+        if complaint_id in seen_ids:
+            raise ValueError(f"Duplicate complaint_id at row {row_number}: {complaint_id}")
+        seen_ids.add(complaint_id)
+        try:
+            datetime.strptime(row["date_received"], "%Y-%m-%d")
+        except ValueError as error:
+            raise ValueError(
+                f"Invalid date_received at row {row_number}: {row['date_received']}"
+            ) from error
     return rows
 
 
@@ -40,6 +54,12 @@ def download_cfpb_sample(
     size: int = 5_000,
 ) -> Path:
     """Download a bounded public CFPB extract and map it to the local schema."""
+    start = datetime.strptime(start_date, "%Y-%m-%d").date()
+    end = datetime.strptime(end_date, "%Y-%m-%d").date()
+    if start > end:
+        raise ValueError("start_date must be on or before end_date")
+    if size <= 0:
+        raise ValueError("size must be positive")
     params = urllib.parse.urlencode(
         {
             "date_received_min": start_date,
@@ -55,7 +75,7 @@ def download_cfpb_sample(
         "https://www.consumerfinance.gov/data-research/consumer-complaints/"
         f"search/api/v1/?{params}"
     )
-    request = urllib.request.Request(url, headers={"User-Agent": "ComplaintOps/0.1"})
+    request = urllib.request.Request(url, headers={"User-Agent": "ComplaintOps/1.0"})
     with urllib.request.urlopen(request, timeout=60) as response:
         payload = json.load(response)
     hits = payload.get("hits", {}).get("hits", [])
@@ -91,4 +111,3 @@ def write_rows(path: str | Path, rows: Iterable[dict[str, str]]) -> Path:
         writer.writeheader()
         writer.writerows(materialized)
     return destination
-

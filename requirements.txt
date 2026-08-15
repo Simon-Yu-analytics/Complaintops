@@ -1,6 +1,2 @@
 # The verified offline pipeline uses only the Python standard library.
-# Optional production upgrades:
-pandas>=2.2
-scikit-learn>=1.5
-plotly>=5.24
-
+# No third-party packages are required for the reproducible demo.

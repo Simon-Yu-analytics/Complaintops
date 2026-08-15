@@ -1,9 +1,8 @@
 [project]
 name = "complaintops"
-version = "0.1.0"
+version = "1.0.0"
 description = "Consumer-finance complaint routing, demand forecasting, and workforce planning."
 requires-python = ">=3.10"
 
 [tool.ruff]
 line-length = 100
-

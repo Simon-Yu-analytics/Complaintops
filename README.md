@@ -1,12 +1,14 @@
 # ComplaintOps
 
+[**Open the live application →**](https://simon-yu-analytics.github.io/Complaintops/) · [Read the 14-page analysis report](reports/ComplaintOps_Analysis_Report.pdf) · [Review the model card](docs/MODEL_CARD.md)
+
 [![Offline quality gates](https://github.com/Simon-Yu-analytics/Complaintops/actions/workflows/ci.yml/badge.svg)](https://github.com/Simon-Yu-analytics/Complaintops/actions/workflows/ci.yml)
 
 **An interactive customer-intake and operations analytics application for
 confidence-aware complaint routing, queue forecasting, and workforce planning.**
 
 ComplaintOps is a student-built analytics case study modeled around the work of
-a customer-operations team. I built it to connect three questions that are
+a customer-operations team. I built it to connect four questions that are
 often analyzed separately:
 
 1. Which product queue should receive a new complaint?
@@ -18,8 +20,17 @@ often analyzed separately:
 The repository includes a privacy-safe offline dataset generator, a bounded CFPB
 downloader, time-aware model validation, walk-forward forecast selection,
 upper-bound capacity planning, 16 Python tests, nine browser-logic tests, CI,
-and a responsive six-view application with a landing page, customer portal, and operations
-console.
+and a responsive six-view application with a landing page, customer portal, and
+operations console.
+
+## Portfolio highlights
+
+- **Decision focus:** routing policy, demand outlook, and staffing recommendations
+  are connected in one workflow rather than presented as isolated model outputs.
+- **Evaluation discipline:** chronological splits, a calibration-only automation
+  threshold, walk-forward forecast selection, and explicit uncertainty bounds.
+- **Reproducible delivery:** offline sample generation, tested Python and browser
+  logic, CI quality gates, a machine-readable report, and a deployed application.
 
 ## Contents
 

@@ -22,7 +22,7 @@ Numeric metrics are rounded when the report is written. The pipeline writes the
 report only after schema validation, temporal evaluation, forecasting, and
 staffing calculations complete successfully.
 
-## Human-readable submission
+## Human-readable report
 
 `ComplaintOps_Analysis_Report.pdf` is a 14-page portfolio report that turns the
 machine-readable output into a visual business narrative. It covers portfolio
@@ -33,4 +33,4 @@ demonstration data.
 
 `visualization_metrics.json` stores the test-set confusion matrix and class-level
 scores used by the visualization script. Rebuild and validate the complete
-submission with `make artifacts` after installing `requirements-viz.txt`.
+project artifacts with `make artifacts` after installing `requirements-viz.txt`.

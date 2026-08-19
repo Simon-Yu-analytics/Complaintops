@@ -171,7 +171,7 @@ def cover(c: canvas.Canvas) -> None:
     c.setFont("ReportBold", 11)
     c.drawString(54, 125, "Junhui (Simon) Yu")
     c.setFont("ReportRegular", 9.5)
-    c.drawString(54, 106, "Economics: Data Science | University of Washington")
+    c.drawString(54, 106, "Personal analytics project | Independent work")
     c.drawString(54, 88, "August 2026 | Version 1.1")
     c.setFillColor(colors.HexColor("#AFC4BC"))
     c.setFont("ReportRegular", 7.8)
@@ -337,7 +337,7 @@ def final_page(c: canvas.Canvas, page: int) -> None:
     c.roundRect(MARGIN, 150, WIDTH - 2 * MARGIN, 128, 12, fill=1, stroke=0)
     c.setFillColor(LIME)
     c.setFont("ReportBold", 10)
-    c.drawString(MARGIN + 18, 250, "REPRODUCE THE SUBMISSION")
+    c.drawString(MARGIN + 18, 250, "REPRODUCE THE PROJECT")
     c.setFillColor(WHITE)
     c.setFont("ReportRegular", 9.2)
     commands = [
@@ -351,7 +351,7 @@ def final_page(c: canvas.Canvas, page: int) -> None:
     c.setFillColor(MUTED)
     c.setFont("ReportRegular", 8)
     c.drawString(MARGIN, 108, "Repository: github.com/Simon-Yu-analytics/Complaintops")
-    c.drawString(MARGIN, 91, "Author: Junhui (Simon) Yu | Economics: Data Science | University of Washington")
+    c.drawString(MARGIN, 91, "Author: Junhui (Simon) Yu | Personal analytics project")
 
 
 def build() -> None:

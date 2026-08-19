@@ -7,7 +7,7 @@
 **An interactive customer-intake and operations analytics application for
 confidence-aware complaint routing, queue forecasting, and workforce planning.**
 
-ComplaintOps is a student-built analytics case study modeled around the work of
+ComplaintOps is a personal analytics project modeled around the work of
 a customer-operations team. I built it to connect four questions that are
 often analyzed separately:
 
@@ -104,7 +104,7 @@ cases, and 1,557 final test cases. The calibration window begins on 16 August
 
 ## Visual analysis and report
 
-The submission includes a **14-page [analysis report](reports/ComplaintOps_Analysis_Report.pdf)**
+The project includes a **14-page [analysis report](reports/ComplaintOps_Analysis_Report.pdf)**
 and ten reproducible figures in the [`plots/`](plots/) gallery. The report is
 written as a business narrative: portfolio demand leads to routing policy,
 forecast uncertainty, workforce capacity, and a customer-support design.
@@ -253,7 +253,7 @@ Complaintops/
 │   ├── generate_sample.py         deterministic data generator
 │   ├── generate_visualizations.py PNG and evaluation-metric generator
 │   ├── generate_report.py         14-page PDF report builder
-│   └── validate_artifacts.py      PNG/PDF submission quality checks
+│   └── validate_artifacts.py      PNG/PDF artifact quality checks
 ├── src/complaintops/              routing, forecast, and capacity modules
 ├── tests/                         Python and dashboard logic tests
 ├── LICENSE
@@ -317,6 +317,6 @@ data-use notice before analysis.
 
 ## Author
 
-**Junhui (Simon) Yu** — Economics: Data Science, University of Washington
+**Junhui (Simon) Yu** — Creator and developer of ComplaintOps
 
 Released under the [MIT License](LICENSE).

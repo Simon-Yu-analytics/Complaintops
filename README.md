@@ -4,12 +4,15 @@
 
 [![Offline quality gates](https://github.com/Simon-Yu-analytics/Complaintops/actions/workflows/ci.yml/badge.svg)](https://github.com/Simon-Yu-analytics/Complaintops/actions/workflows/ci.yml)
 
-**An interactive customer-intake and operations analytics application for
-confidence-aware complaint routing, queue forecasting, and workforce planning.**
+**A consumer-finance complaint operations application for confidence-aware
+routing, queue forecasting, and workforce planning.**
 
-ComplaintOps is a personal analytics project modeled around the work of
-a customer-operations team. I built it to connect four questions that are
-often analyzed separately:
+ComplaintOps is a personal analytics project for complaint-operations teams at
+banks, lenders, credit-card and mortgage providers, and credit-reporting
+businesses. It models complaints from consumers across five product areas:
+checking or savings accounts, credit cards, credit reporting, debt collection,
+and mortgages. I built it to connect four questions that are often analyzed
+separately:
 
 1. Which product queue should receive a new complaint?
 2. How many cases should each queue expect over the next four weeks?
@@ -23,6 +26,17 @@ upper-bound capacity planning, 16 Python tests, nine browser-logic tests, CI,
 and a responsive six-view application with a landing page, customer portal, and
 operations console.
 
+## Domain and intended users
+
+ComplaintOps is scoped to **consumer financial services complaints** rather
+than restaurant, delivery, property-rental, or general ecommerce reviews.
+
+| Intended user | Decision supported |
+|---|---|
+| Consumer | Submit an English-language financial complaint, understand the suggested destination, and request human help |
+| Complaint-operations manager or customer-support lead | Route cases into five product queues and reserve uncertain cases for review |
+| Workforce-planning or analytics lead | Forecast queue demand, test stress scenarios, and estimate required staffing |
+
 ## Portfolio highlights
 
 - **Decision focus:** routing policy, demand outlook, and staffing recommendations
@@ -34,6 +48,7 @@ operations console.
 
 ## Contents
 
+- [Domain and intended users](#domain-and-intended-users)
 - [Why I built this](#why-i-built-this)
 - [Decision workflow](#decision-workflow)
 - [Demonstration snapshot](#demonstration-snapshot)

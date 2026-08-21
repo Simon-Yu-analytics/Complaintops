@@ -3,15 +3,20 @@
 ## Model overview
 
 ComplaintOps uses a standard-library implementation of multinomial Naive Bayes
-to route complaint narratives into five product queues. The model is an
-interpretable baseline for an operations case study, not a production decision
-system.
+to route consumer-finance complaint narratives into five product queues. The
+model is an interpretable baseline for a financial-services complaint operations
+case study, not a production decision system.
 
 ## Intended use
 
+- Support complaint-operations teams, customer-support leads, and workforce
+  planners at banks, lenders, and credit-reporting businesses.
 - Suggest a product queue for newly received English-language complaints.
 - Auto-route only cases above a threshold selected on a calibration period.
 - Send all lower-confidence cases to a human review queue.
+
+The model is not designed for restaurant, delivery, property-rental, ecommerce,
+or other general feedback domains.
 
 The model should not determine complaint validity, customer eligibility,
 compensation, regulatory reporting, or any other outcome affecting a consumer.

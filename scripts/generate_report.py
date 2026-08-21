@@ -134,7 +134,7 @@ def cover(c: canvas.Canvas) -> None:
     c.rect(0, 0, 13, HEIGHT, fill=1, stroke=0)
     c.setFillColor(LIME)
     c.setFont("ReportBold", 10)
-    c.drawString(54, 716, "BUSINESS ANALYTICS PORTFOLIO CASE STUDY")
+    c.drawString(54, 716, "CONSUMER FINANCE ANALYTICS PROJECT")
     c.setFillColor(WHITE)
     c.setFont("ReportBold", 38)
     c.drawString(54, 638, "ComplaintOps")
@@ -142,7 +142,7 @@ def cover(c: canvas.Canvas) -> None:
     c.drawString(54, 596, "From customer voice to operating decisions")
     paragraph(
         c,
-        "A reproducible analysis of confidence-aware complaint routing, queue forecasting, workforce capacity, and customer support design.",
+        "A consumer-finance complaint operations analysis of confidence-aware routing, queue forecasting, workforce capacity, and customer support design.",
         54,
         554,
         455,
@@ -182,7 +182,7 @@ def executive_summary(c: canvas.Canvas, page: int) -> None:
     section_header(c, "Executive summary", "What the project demonstrates", page)
     paragraph(
         c,
-        "ComplaintOps connects three decisions that are often separated in portfolio work: where a complaint should go, how much work each queue should expect, and how much capacity should be scheduled. A customer-facing prototype adds explanation, human review, and feedback without pretending the demo is a live service.",
+        "ComplaintOps is designed for complaint-operations, customer-support, and workforce-planning teams at banks, lenders, and credit-reporting businesses. It connects where a financial complaint should go, how much work each queue should expect, and how much capacity should be scheduled. A customer-facing prototype adds explanation and human review without pretending the demo is a live service.",
         MARGIN,
         680,
         WIDTH - 2 * MARGIN,
@@ -231,7 +231,7 @@ def workflow(c: canvas.Canvas, page: int) -> None:
     section_header(c, "Decision design", "One analysis, four connected decisions", page)
     paragraph(
         c,
-        "The project is structured as a decision pipeline. Each output becomes an input to the next stage, so the analysis ends with an operating recommendation rather than a collection of unrelated charts.",
+        "The project is structured as a consumer-finance complaint decision pipeline. Each output becomes an input to the next stage, so the analysis ends with an operating recommendation rather than a collection of unrelated charts.",
         MARGIN,
         682,
         WIDTH - 2 * MARGIN,
@@ -277,7 +277,7 @@ def workflow(c: canvas.Canvas, page: int) -> None:
     c.drawString(MARGIN + 18, 312, "CUSTOMER EXPERIENCE LAYER")
     paragraph(
         c,
-        "The interactive application lets a user submit a sample narrative, view ranked routing scores, request a human specialist, open a device-local demo case, ask guided support questions, and leave a 1-5 rating with written feedback. No real complaint text is transmitted.",
+        "The interactive application lets a consumer submit a sample financial complaint, view ranked product-queue scores, request a human specialist, open a device-local demo case, ask guided support questions, and leave a 1-5 rating with written feedback. No real complaint text is transmitted.",
         MARGIN + 18,
         287,
         WIDTH - 2 * MARGIN - 36,
